@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>day 5</title>
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+    <header>
+        <h1 id="id_titulo"></h1>
+    </header>
+    <main>
+        <section>
+            <div>
+                <div>
+                    <p class="class_p_preguntas" id="id_preguntas"></p>
+                    <input type="text" id="id_input_ingresado">
+                    <div class="class_input_okno">
+                        <input type="button" onclick="bntOk();" id="id_btn_ok" value="">
+                        <input type="button" onclick="bntNo();" id="id_btn_no" value="">
+                    </div>
+                </div>
+                <div class="class_btn_categorias">
+                    <p id="id_preguntas2"></p>
+                    <input type="button" onclick="bntFrutas();" id="id_btn_fruta" value="">
+                    <input type="button" onclick="bntLacteos();" id="id_btn_lacteos" value="">
+                    <input type="button" onclick="bntCongelados();" id="id_btn_congelados" value="">
+                    <input type="button" onclick="bntDulces();" id="id_btn_dulces" value="">                                        
+                </div>
+            </div>
+            <div class="class_p_lista">
+                <p id="id_lista"></p>
+                <p id="id_lista_frutas"></p>
+                <p id="id_lista_lacteos"></p>
+                <p id="id_lista_congelados"></p>
+                <p id="id_lista_dulces"></p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p id="id_autor"></p>
+    </footer>
+
+    <script src="./apps/app.js"></script>
+</body>
+</html>

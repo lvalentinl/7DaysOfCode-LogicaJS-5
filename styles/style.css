@@ -1,0 +1,42 @@
+:root{
+    --color-prim: #F3CA52;
+    --color-sec: #F6E9B2;
+    --color-ter: #0A6847;
+    --color-cuat: #7ABA78;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-cuat);
+    padding: 10%;
+}
+
+main{
+    padding: 5%;
+    font-size: 1.25rem;
+}
+
+section{
+    text-align: center;
+}
+
+.class_p_preguntas{
+    padding: 5%;
+}
+
+.class_btn_categorias{
+    padding: 5%;
+}
+
+.class_p_lista{
+    padding: 5%;
+    text-align: left;
+}
