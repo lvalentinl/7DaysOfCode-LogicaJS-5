@@ -2,6 +2,9 @@ let listaFrutas = [];
 let listaLacteos = [];
 let listaCongelados = [];
 let listaDulces = [];
+let cantidadIngresada = 0;
+let superLista = [];
+let indiceEliminado = -1;
 
 function asignarTextoHTML(idEtiqueta, texto){
     let textoAsigando = document.getElementById(idEtiqueta);
@@ -29,6 +32,7 @@ function condicionesIniciales(){
 
     asignarTextoHTML('id_btn_ok',`OK`);
     asignarTextoHTML('id_btn_no',`NO`);
+    asignarTextoHTML('id_btn_eliminar',`Eliminar`);
     asignarTextoHTML('id_btn_fruta',`Frutas`);
     asignarTextoHTML('id_btn_lacteos',`Lacteos`);
     asignarTextoHTML('id_btn_congelados',`Congelados`);
@@ -41,6 +45,7 @@ function condicionesIniciales(){
     asignarTextoHTML('id_autor',`Creado por J. Valentin`);
 
     ocultarElementoHTML('id_btn_no', true);
+    ocultarElementoHTML('id_btn_eliminar', true);
     ocultarElementoHTML('id_btn_fruta', true);
     ocultarElementoHTML('id_btn_lacteos', true);
     ocultarElementoHTML('id_btn_congelados', true);
@@ -52,6 +57,9 @@ function condicionesIniciales(){
     listaLacteos = [];
     listaCongelados = [];
     listaDulces = [];
+    cantidadIngresada = 0;
+    superLista = [];
+    indiceEliminado = -1;
 }
 
 condicionesIniciales();
@@ -69,38 +77,75 @@ function bntOk(){
 
     asignarTextoHTML('id_btn_no',`Finalizar`);
     ocultarElementoHTML('id_btn_no', false);
+
+    limpiarInput('id_input_ingresado');
 }
 
 function elementoComprado(listaCompra){
     let elementoIngresado = document.getElementById('id_input_ingresado').value;
-    listaCompra.push(elementoIngresado);
-    limpiarInput('id_input_ingresado');
+    if (elementoIngresado == '') {
+        alert(`Ingresar un Producto por favor`);
+    } else {
+        listaCompra.push(elementoIngresado);
+        limpiarInput('id_input_ingresado');
+        cantidadIngresada++;        
+    }
+    if (cantidadIngresada == 1) {
+        ocultarElementoHTML('id_btn_eliminar', false);
+    }
     return;
 }
 
 function bntFrutas(){
     elementoComprado(listaFrutas);    
+    mostrarLista();
 }
 
 function bntLacteos(){
     elementoComprado(listaLacteos);    
+    mostrarLista();
 }
 
 function bntCongelados(){
-    elementoComprado(listaCongelados);    
+    elementoComprado(listaCongelados);   
+    mostrarLista(); 
 }
 
 function bntDulces(){
     elementoComprado(listaDulces);    
+    mostrarLista();
 }
 
-function bntNo(){
-    setTimeout(() => {
-        condicionesIniciales();
-    },5000);    
+function mostrarLista(){
     asignarTextoHTML('id_lista',`Lista de compras:`);
     asignarTextoHTML('id_lista_frutas',`Frutas: ${listaFrutas}`);
     asignarTextoHTML('id_lista_lacteos',`Lácteos: ${listaLacteos}`);
     asignarTextoHTML('id_lista_congelados',`Congelados: ${listaCongelados}`);
     asignarTextoHTML('id_lista_dulces',`Dulces: ${listaDulces}`);
+}
+
+function bntNo(){
+    setTimeout(() => {
+        condicionesIniciales();
+    },1000);    
+    mostrarLista();
+    //alert(cantidadIngresada);
+}
+
+function bntEliminar(){
+    superLista = [listaFrutas, listaLacteos, listaCongelados, listaDulces];
+    let elementoEliminado = document.getElementById('id_input_ingresado').value; 
+    
+    if (superLista.includes(elementoEliminado) == true) {
+        alert(`¡No fue posible encontrar el elemento en la lista!`)
+    } 
+    superLista.forEach(superLista =>{
+        indiceEliminado = superLista.indexOf(elementoEliminado); //buscamos el indice del elemento a eliminar        
+        if (indiceEliminado !== -1) {            
+            superLista.splice(indiceEliminado, 1); //elimina 1 elemento
+            mostrarLista();
+        }
+    });
+    
+    limpiarInput('id_input_ingresado');
 }
