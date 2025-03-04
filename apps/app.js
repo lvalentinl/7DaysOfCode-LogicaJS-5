@@ -5,6 +5,7 @@ let listaDulces = [];
 let cantidadIngresada = 0;
 let superLista = [];
 let indiceEliminado = -1;
+let encontrado = 0;
 
 function asignarTextoHTML(idEtiqueta, texto){
     let textoAsigando = document.getElementById(idEtiqueta);
@@ -60,6 +61,7 @@ function condicionesIniciales(){
     cantidadIngresada = 0;
     superLista = [];
     indiceEliminado = -1;
+    encontrado = 0;
 }
 
 condicionesIniciales();
@@ -134,18 +136,23 @@ function bntNo(){
 
 function bntEliminar(){
     superLista = [listaFrutas, listaLacteos, listaCongelados, listaDulces];
-    let elementoEliminado = document.getElementById('id_input_ingresado').value; 
+    let elementoEliminado = document.getElementById('id_input_ingresado').value;
+    encontrado = 0;
     
-    if (superLista.includes(elementoEliminado) == true) {
-        alert(`¡No fue posible encontrar el elemento en la lista!`)
-    } 
-    superLista.forEach(superLista =>{
-        indiceEliminado = superLista.indexOf(elementoEliminado); //buscamos el indice del elemento a eliminar        
-        if (indiceEliminado !== -1) {            
-            superLista.splice(indiceEliminado, 1); //elimina 1 elemento
-            mostrarLista();
-        }
-    });
-    
-    limpiarInput('id_input_ingresado');
+    if (elementoEliminado == '') {
+        alert(`Ingresar un producto para eliminar`);
+    } else {
+        superLista.forEach(superLista =>{
+            indiceEliminado = superLista.indexOf(elementoEliminado); //buscamos el indice del elemento a eliminar        
+            if (indiceEliminado !== -1) {            
+                superLista.splice(indiceEliminado, 1); //elimina 1 elemento
+                mostrarLista();
+                encontrado++;
+            }
+        });
+        if (encontrado == 0) {
+            alert(`¡No fue posible encontrar el elemento en la lista!`);
+        } 
+        limpiarInput('id_input_ingresado');
+    }
 }
